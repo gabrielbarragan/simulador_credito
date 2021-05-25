@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Simulador de credito</title>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav-bar">
+            <a href="#" id="volver">Reiniciar</a>
+            <figure class="header__logo">GboProfe</figure>
+            <ul class="menu">
+                <li class="menu__item">Regresar al perfil</li>
+                <li class="menu__item">Más</li>
+            </ul>
+        </nav>
+    </header>
+    <main class="main">
+        <section class="main__section" id="section_option">
+            <h1 class="font__title">Simulador de credito de libre inversión</h1>
+            <p class="p__section">Calcula el valor de la cuota o el monto que puedes solicitar de acuerdo con las necesidades de crédito y capacidad de pago.</p>
+            <div class="main__section-options" id="options">
+                <h2 class="section-options__title">Opciones</h2>
+               <div class="section__option" id="conoce_monto">
+                <span class="main__section-icon"></span>
+                <h3 class="font__subtitle">Conozco el monto</h3>
+               </div>
+               <div class="section__option" id="conoce_cuota">
+                    <span class="main__section-icon"></span>
+                    <h3 class="font__subtitle">Conozco mi cuota</h3>
+               </div>
+               <p class="p__section">Valores difieren según vida crediticia y condiciones propias de cada banco</p>
+            </div>
+            <div class="section__forms" id="forms" name="forms" >
+                <form action="" id="form_datos" class="main__form">
+                    <input class="main__form-input" type="number" min="0" id="cuota" placeholder="Cuota en pesos" >
+                    <input class="main__form-input" type="number" id="monto_prestamo" min="0"  placeholder="Monto a prestar">
+                    <input  class="main__form-input" type="number" id="meses" min="0" max="72" placeholder="Plazo en meses">
+                    <input class="main__form-input" type="number" id="interes" min="0" step="0.01" placeholder="Interés mensual">
+                    <button class="form__btn" id="calcular">Calcular</button>
+                    
+                </form>    
+            </div>
+           
+        </section>
+
+    </main>
+    <footer class="footer"></footer>
+</body>
+
+<script src="js/calcular_credito.js">
+
+</script>
+</html>
