@@ -21,8 +21,6 @@ const borrarForm=()=>{
         montoNode.value=""
         mesesNode.value=""
         interesNode.value=""
-        const container_result= document.querySelector('div#container_result')
-        container_result.removeChild(document.querySelector('h3'))
       } catch (error) {
         // whatever
       }
@@ -32,9 +30,6 @@ const backClick= () => {
     borrarForm();
     optionSection.appendChild(optionsNode)
     
-}
-const mensajeAlClick= () => {
-    console.log("clickeado")
 }
 const conoceMonto= () => {
     
@@ -65,7 +60,7 @@ const conoceCuota= () => {
         montoNode.classList.add("input--like-label")
     }
     catch{
-
+        //
     }
     estado="cuota"
 
@@ -75,47 +70,43 @@ const calcular=() =>{
     const mesesNode = document.querySelector('input#meses')
     const interesNode = document.querySelector('input#interes')
     try{
-        optionSection.removeChild(document.querySelector('h3#result'))
+        if (estado==="cuota"){
+            let cuotaValue = parseFloat(cuotaNode.value); 
+            let mesesValue = parseFloat(mesesNode.value); 
+            let interesValue = parseFloat(interesNode.value)/100;
+    
+            let monto= (cuotaValue*(1-((1+interesValue)**(-1*mesesValue))))/interesValue
+            monto_valor=Math.round(monto,1)
+            console.log(monto_valor)
+            montoNode.setAttribute('type','text')
+            if (monto_valor==NaN){
+                montoNode.value=""
+            }
+            else{
+            montoNode.value=formatPrice(monto_valor);
+            }
+        }
+        else if(estado==="monto"){
+            let montoValue = parseFloat(montoNode.value); 
+            let mesesValue = parseFloat(mesesNode.value); 
+            let interesValue = parseFloat(interesNode.value)/100;
+    
+            let cuota= (interesValue*montoValue)/(1-((1+interesValue)**(-1*mesesValue)))  
+            cuota_valor=Math.round(cuota,1)
+            console.log(cuota_valor)
+            cuotaNode.setAttribute('type','text')
+            if (cuota_valor==NaN){
+                cuotaNode.value=""
+            }else{
+            cuotaNode.value=formatPrice(cuota_valor); 
+            } 
+        }
     }
     catch{
-
-    }
-    if (estado==="cuota"){
-        let cuotaValue = parseFloat(cuotaNode.value); 
-        let mesesValue = parseFloat(mesesNode.value); 
-        let interesValue = parseFloat(interesNode.value)/100;
-
-        let monto= (cuotaValue*(1-((1+interesValue)**(-1*mesesValue))))/interesValue
-        monto_valor=Math.round(monto,1)
-        console.log(monto_valor)
-        montoNode.setAttribute('type','text')
-        if (monto_valor==NaN){
-            montoNode.value=""
-        }
-        else{
-        montoNode.value=formatPrice(monto_valor);
-        }
-    }
-    else if(estado==="monto"){
-        let montoValue = parseFloat(montoNode.value); 
-        let mesesValue = parseFloat(mesesNode.value); 
-        let interesValue = parseFloat(interesNode.value)/100;
-
-        let cuota= (interesValue*montoValue)/(1-((1+interesValue)**(-1*mesesValue)))  
-        cuota_valor=Math.round(cuota,1)
-        console.log(cuota_valor)
-        cuotaNode.setAttribute('type','text')
-        if (cuota_valor===NaN){
-            cuotaNode.value=""
-        }else{
-        cuotaNode.value=formatPrice(cuota_valor); 
-        } 
+        //
     }
     
-
-}
-
-
+};
 const formatPrice = (price) => {
     const nuevoPrecio= new window.Intl.NumberFormat('es-CO',{
         style:'currency',
@@ -128,7 +119,6 @@ const formatPrice = (price) => {
 
 
 borrarForm();
-formsNode.addEventListener('click',mensajeAlClick)
 montoBoton.addEventListener('click',conoceMonto)
 cuotaBoton.addEventListener('click',conoceCuota)
 backNode.addEventListener('click',backClick)
